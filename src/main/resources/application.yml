@@ -1,0 +1,15 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: CORE-SERVICE
+  datasource:
+    url: jdbc:mysql://localhost:3306/coreservice
+    username: root
+    password: Badri@2001
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
