@@ -9,26 +9,35 @@ import com.core_service.service.UserService;
 import com.core_service.util.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
     @Autowired
     private UserRepository userRepository;
     @Override
-    public ApiResponse createUser(UserRegistrationReqDto userRegistrationReqDto) {
+    public ApiResponse createUser(UserRegistrationReqDto reqDto) {
         try{
 
-            User user = userMapper.DtoToEntity(userRegistrationReqDto);
+            User user = User.builder()
+                    .firstName(reqDto.getFirstName()).middleName(reqDto.getMiddleName())
+                    .lastName(reqDto.getLastName()).email(reqDto.getEmail())
+                    .mobileNo(reqDto.getMobileNo()).address(reqDto.getAddress())
+                    .gender(reqDto.getGender()).password(reqDto.getPassword())
+                    .createdOn(reqDto.getCreatedOn()).updatedOn(reqDto.getUpdatedOn())
+                    .build();
 
             User savedUser = userRepository.saveAndFlush(user);
-            UserRegistrationReqDto userDto = userMapper.entityToDto(savedUser);
 
-            UserRegistrationResDto response = UserRegistrationResDto.builder().id(userDto.getId()).name(savedUser.getName())
-                    .email(userDto.getEmail()).mobileNo(userDto.getMobileNo())
-                    .address(userDto.getAddress()).gender(userDto.getGender())
-                    .password(userDto.getPassword()).createdOn(userDto.getCreatedOn())
-                    .updatedOn(userDto.getUpdatedOn()).build();
+            UserRegistrationResDto response = UserRegistrationResDto
+                    .builder().id(savedUser.getId()).firstName(savedUser.getFirstName())
+                    .middleName(savedUser.getMiddleName()).lastName(savedUser.getLastName())
+                    .email(savedUser.getEmail()).mobileNo(savedUser.getMobileNo())
+                    .address(savedUser.getAddress()).gender(savedUser.getGender())
+                    .password(savedUser.getPassword()).createdOn(savedUser.getCreatedOn())
+                    .updatedOn(savedUser.getUpdatedOn()).build();
 
             return ApiResponse.builder().statusCode(HttpStatus.CREATED)
                     .message("User Created Successfully").data(response).build();

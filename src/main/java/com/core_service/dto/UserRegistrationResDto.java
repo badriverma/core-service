@@ -1,24 +1,21 @@
 package com.core_service.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import java.util.Date;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 @Builder
 public class UserRegistrationResDto {
     private Long id;
-    private String name;
+    private String firstName;
+    private String middleName;
+    private String lastName;
     private String email;
     private String mobileNo;
     private String gender;
     private String address;
     private String password;
-    public Date createdOn;
-    public Date updatedOn;
+    private Date createdOn;
+    private Date updatedOn;
 }

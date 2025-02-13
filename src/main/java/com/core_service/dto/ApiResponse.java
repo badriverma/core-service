@@ -1,8 +1,7 @@
 package com.core_service.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 

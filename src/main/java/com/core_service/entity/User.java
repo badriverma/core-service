@@ -24,8 +24,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "Name is Mandatory")
-    private String name;
+    @NotEmpty(message = "First is Mandatory")
+    private String firstName;
+
+    private String middleName;
+
+    @NotEmpty(message = "Last Name is Mandatory")
+    private String lastName;
 
     @Email(message = "Email is Mandatory")
     private String email;
@@ -42,8 +47,8 @@ public class User {
     private String password;
 
     @CreationTimestamp
-    public Date createdOn;
+    private Date createdOn;
 
     @UpdateTimestamp
-    public Date updatedOn;
+    private Date updatedOn;
 }

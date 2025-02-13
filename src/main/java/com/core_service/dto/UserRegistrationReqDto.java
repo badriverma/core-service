@@ -2,23 +2,27 @@ package com.core_service.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 @Builder
 public class UserRegistrationReqDto {
 
     private Long id;
 
-    @NotEmpty(message = "Name is Mandatory")
-    private String name;
+    @NotEmpty(message = "First Name is Mandatory")
+    private String firstName;
+
+    private String middleName;
+
+    @NotEmpty(message = "Last Name is Mandatory")
+    private String lastName;
 
     @Email(message = "Email is Mandatory")
     private String email;
