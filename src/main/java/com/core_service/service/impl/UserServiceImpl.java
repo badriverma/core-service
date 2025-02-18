@@ -9,14 +9,20 @@ import com.core_service.service.UserService;
 import com.core_service.util.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
+
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public ApiResponse createUser(UserRegistrationReqDto reqDto) {
         try{
@@ -25,7 +31,7 @@ public class UserServiceImpl implements UserService {
                     .firstName(reqDto.getFirstName()).middleName(reqDto.getMiddleName())
                     .lastName(reqDto.getLastName()).email(reqDto.getEmail())
                     .mobileNo(reqDto.getMobileNo()).address(reqDto.getAddress())
-                    .gender(reqDto.getGender()).password(reqDto.getPassword())
+                    .gender(reqDto.getGender()).password(passwordEncoder.encode(reqDto.getPassword()))
                     .createdOn(reqDto.getCreatedOn()).updatedOn(reqDto.getUpdatedOn())
                     .build();
 
